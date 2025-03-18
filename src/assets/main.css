@@ -1,0 +1,89 @@
+@import "tailwindcss/base"; /* import base CSS classes from Tailwind CSS (optional) */
+
+@import "mechtaui/dist/style.css";
+@import "tailwindcss/components"; /* import components CSS classes from Tailwind CSS (optional) */
+@import "tailwindcss/utilities"; /* import utilities CSS classes from Tailwind CSS (optional) */
+@import "tailwindcss/screens";
+@import "mechtaui/cssvariables";
+
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply mi-text-body-1 text-mi-text-primary bg-mi-brand-base-background print:!text-mi-text-primary;
+  }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 9999;
+}
+.dark::view-transition-old(root) {
+  z-index: 9999;
+}
+.dark::view-transition-new(root) {
+  z-index: 1;
+}
+
+/* Apply styles on print. Remove default header when print */
+@media only print {
+  @page {
+    size: auto;
+    margin: 0px;
+    margin-bottom: 15mm;
+    margin-top: 28px;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    counter-reset: page_num;
+    print-color-adjust: exact;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.6;
+  font-family: Lato, sans-serif;
+  font-size: 14px;
+}
+::-webkit-scrollbar {
+  height: 4px;
+  background-color: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e5e7ec;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(229, 231, 236, 0.38);
+}
+
+/* Microsoft Edge and IE */
+.scrollbar {
+  -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
+}
